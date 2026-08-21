@@ -20,7 +20,7 @@ const App = () => {
    return (
       <div className="p-4">
          <p className="font-bold text-3xl">{message}</p>
-         <Button variant="outline">Button</Button>
+         <Button variant="outline">Button!</Button>
       </div>
    );
 };
