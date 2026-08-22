@@ -20,5 +20,8 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@google/genai": "^2.18.0"
+  }
 }
