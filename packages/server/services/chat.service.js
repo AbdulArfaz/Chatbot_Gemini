@@ -34,6 +34,6 @@ export const chatService = {
       const response = await chatSession.sendMessage({ message: prompt });
       console.log('Al response recieved successfully');
 
-      return { message: response.text };
+      return response.text;
    },
 };
