@@ -1,17 +1,11 @@
 import express from 'express';
-import { GoogleGenAI } from '@google/genai';
+
 import z, { string } from 'zod';
+import { chatService } from './services/chat.service';
 
 const app = express();
 
 app.use(express.json());
-
-const ai = new GoogleGenAI({
-   apiKey: process.env.GEMINI_API_KEY,
-   httpOptions: {
-      timeout: 120000,
-   },
-});
 
 app.get('/', (req, res) => {
    res.send('Hello World!');
@@ -19,8 +13,6 @@ app.get('/', (req, res) => {
 app.get('/api/hello', (req, res) => {
    res.json({ message: 'hello to all the person out there ,are you good' });
 });
-
-const conversations = new Map();
 
 const chatSchema = z.object({
    prompt: z
@@ -39,25 +31,10 @@ app.post('/api/chat', async (req, res) => {
             error: parseResult.error.issues[0].message,
          });
       }
-
       const { prompt, conversationId } = req.body;
-      let chat = conversations.get(conversationId);
-      if (!chat) {
-         chat = ai.chats.create({
-            model: 'gemini-3.5-flash-lite',
-            contents: prompt,
-            config: {
-               temperature: 0.5,
-               maxOutputTokens: 8192,
-               topP: 0.95,
-            },
-         });
-         conversations.set(conversationId, chat);
-      }
-      const response = await chat.sendMessage({
-         message: prompt,
-      });
-      res.json({ message: response.text });
+      const replyText = await chatService.sendMessage(prompt, conversationId);
+
+      res.json({ message: replyText });
    } catch (error) {
       console.log('Gemini Error:', error);
       res.status(500).json({
