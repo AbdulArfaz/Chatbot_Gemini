@@ -26,10 +26,13 @@ const ChatBot = () => {
       setIsBotTyping(true);
       setError('');
       try {
-         const { data } = await axios.post('/api/chat', {
-            prompt,
-            conversationId: conversationId.current,
-         });
+         const { data } = await axios.post(
+            'https://chatbot-gemini-amj9.onrender.com/api/chat',
+            {
+               prompt,
+               conversationId: conversationId.current,
+            }
+         );
          setMessage((prev) => [
             ...prev,
             { content: data.message, role: 'bot' },
