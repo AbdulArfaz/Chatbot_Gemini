@@ -51,34 +51,50 @@ const ChatBot = () => {
    };
 
    return (
-      <div className="flex flex-col  h-full">
-         <div className="flex flex-1 flex-col gap-3 mb-10 overflow-y-auto">
-            <ChatMessages message={message} lastMessageRef={lastMessageRef} />
-            {isBotTyping && <TypingIndicator />}
-            {error && <p className="text-red-500">{error}</p>}
-         </div>
-         <form
-            onSubmit={handleSubmit(onSubmit)}
-            onKeyDown={onKeyDown}
-            className="flex flex-col gap-2 items-end border-2 p-4 rounded-3xl"
-         >
-            <textarea
-               {...register('prompt', {
-                  required: true,
-                  validate: (data) => data.trim().length > 0,
-               })}
-               autoFocus
-               className="w-full border-0 focus:outline-0 resize-none"
-               placeholder="Ask Anything"
-               maxLength={1000}
-            />
-            <button
-               disabled={!formState.isValid}
-               className="rounded-full w-9 h-9"
+      <div className="flex flex-col h-screen bg-linear-to-br from-slate-950 via-purple-950 to-slate-900 text-slate-100 antialiased">
+         <div className="flex-1 flex flex-col h-full overflow-hidden max-w-4xl w-full mx-auto px-4 pt-6">
+            <div className="flex-1 flex flex-col gap-4 mb-4 overflow-y-auto pr-2 custom-scrollbar">
+               <ChatMessages
+                  message={message}
+                  lastMessageRef={lastMessageRef}
+               />
+               {isBotTyping && <TypingIndicator />}
+               {error && (
+                  <p className="text-pink-400 text-sm bg-pink-500/10 border border-pink-500/20 px-4 py-2 rounded-xl backdrop-blur-md">
+                     {error}
+                  </p>
+               )}
+            </div>
+
+            <form
+               onSubmit={handleSubmit(onSubmit)}
+               onKeyDown={onKeyDown}
+               className="flex flex-col md:flex-row items-center gap-3 bg-white/5 backdrop-blur-xl border border-white/10 p-3 rounded-2xl shadow-2xl mb-6 shadow-purple-950/50 focus-within:border-purple-500/50 transition-all duration-300"
             >
-               <FaArrowCircleUp />
-            </button>
-         </form>
+               <textarea
+                  {...register('prompt', {
+                     required: true,
+                     validate: (data) => data.trim().length > 0,
+                  })}
+                  autoFocus
+                  placeholder="Ask anything or type a prompt..."
+                  rows={1}
+                  maxLength={1000}
+                  className="w-full bg-transparent border-0 focus:outline-none focus:ring-0 resize-none text-slate-100 placeholder-slate-400 text-sm py-2 px-2 max-h-32"
+               />
+               <button
+                  type="submit"
+                  disabled={!formState.isValid}
+                  className={`rounded-xl px-5 py-2.5 flex items-center justify-center transition-all duration-200 cursor-pointer shadow-lg shrink-0 ${
+                     formState.isValid
+                        ? 'bg-linear-to-r from-pink-500 to-violet-600 hover:opacity-90 active:scale-95 text-white shadow-purple-900/40'
+                        : 'bg-white/5 text-slate-500 cursor-not-allowed border border-white/5'
+                  }`}
+               >
+                  <FaArrowCircleUp className="text-xl" />
+               </button>
+            </form>
+         </div>
       </div>
    );
 };

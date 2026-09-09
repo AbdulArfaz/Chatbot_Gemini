@@ -16,13 +16,15 @@ const ChatMessages = ({ message, lastMessageRef }) => {
             <div
                key={index}
                onCopy={onCopyMessage}
-               className={`px-3 py-1 rounded-xl ${
+               className={`flex flex-col max-w-[85%] md:max-w-[75%] px-5 py-3.5 rounded-2xl text-sm leading-relaxed backdrop-blur-md shadow-md transition-all ${
                   message.role === 'user'
-                     ? 'bg-blue-600 text-white self-end'
-                     : 'bg-gray-100 text-black self-start'
+                     ? 'bg-linear-to-r from-pink-500 to-violet-600 text-white self-end rounded-tr-sm shadow-purple-900/20'
+                     : 'bg-white/10 text-slate-200 border border-white/10 self-start rounded-tl-sm'
                }`}
             >
-               <ReactMarkdown>{message.content}</ReactMarkdown>
+               <div className="markdown-content">
+                  <ReactMarkdown>{message.content}</ReactMarkdown>
+               </div>
             </div>
          ))}
          <div ref={lastMessageRef} />
