@@ -26,10 +26,6 @@ const ChatBot = () => {
       setMessage((prev) => [...prev, { content: prompt, role: 'user' }]);
       setIsBotTyping(true);
       try {
-         console.log('checking payload:', {
-            prompt,
-            conversationId: conversationId.current,
-         });
          const { data } = await axios.post(
             'https://chatbot-gemini-amj9.onrender.com/api/chat',
             { prompt, conversationId: conversationId.current }
@@ -56,9 +52,7 @@ const ChatBot = () => {
 
    return (
       <div className="flex flex-col h-screen bg-linear-to-br from-slate-950 via-purple-950 to-slate-900 text-slate-100 antialiased">
-         {/* Chat Body Area */}
          <div className="flex-1 flex flex-col h-full overflow-hidden max-w-4xl w-full mx-auto px-4 pt-6">
-            {/* Messages Scroll Container */}
             <div className="flex-1 flex flex-col gap-4 mb-4 overflow-y-auto pr-2 custom-scrollbar">
                <ChatMessages
                   message={message}
@@ -72,7 +66,6 @@ const ChatBot = () => {
                )}
             </div>
 
-            {/* Input Form Footer */}
             <form
                onSubmit={handleSubmit(onSubmit)}
                onKeyDown={onKeyDown}

@@ -1,7 +1,6 @@
 import { chatService } from '../services/chat.service';
 import z from 'zod';
 
-//implementation details
 const chatSchema = z.object({
    prompt: z
       .string()
@@ -11,7 +10,6 @@ const chatSchema = z.object({
    conversationId: z.string().min(1, 'ConversationId is Required'),
 });
 
-//public Interface
 export const chatController = {
    async sendMessage(req, res) {
       const parseResult = chatSchema.safeParse(req.body);
