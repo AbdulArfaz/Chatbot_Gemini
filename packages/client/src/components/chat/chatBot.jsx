@@ -13,7 +13,7 @@ const ChatBot = () => {
    const [isBotTyping, setIsBotTyping] = useState(false);
    const [error, setError] = useState('');
    const lastMessageRef = useRef(null);
-   const conversationId = useRef(crypto.randomUUID);
+   const conversationId = useRef(crypto.randomUUID());
    const { register, handleSubmit, reset, formState } = useForm();
 
    useEffect(() => {
@@ -26,6 +26,10 @@ const ChatBot = () => {
       setMessage((prev) => [...prev, { content: prompt, role: 'user' }]);
       setIsBotTyping(true);
       try {
+         console.log('checking payload:', {
+            prompt,
+            conversationId: conversationId.current,
+         });
          const { data } = await axios.post(
             'https://chatbot-gemini-amj9.onrender.com/api/chat',
             { prompt, conversationId: conversationId.current }
