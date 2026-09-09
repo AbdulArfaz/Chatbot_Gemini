@@ -6,6 +6,7 @@
       "name": "project1",
       "dependencies": {
         "@google/genai": "^2.18.0",
+        "cors": "^2.8.6",
         "react-icons": "^5.7.0",
       },
       "devDependencies": {
