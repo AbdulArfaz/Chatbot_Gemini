@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 
 const ChatBot = () => {
    const [message, setMessage] = useState([]);
+   const [error, setError] = useState('');
    const [isBotTyping, setIsBotTyping] = useState(false);
    const lastMessageRef = useRef(null);
    const conversationId = useRef(crypto.randomUUID());
@@ -21,6 +22,7 @@ const ChatBot = () => {
    const onSubmit = async ({ prompt }) => {
       setMessage((prev) => [...prev, { content: prompt, role: 'user' }]);
       setIsBotTyping(true);
+      setError('');
       try {
          const { data } = await axios.post('/api/chat', {
             prompt,
@@ -30,10 +32,12 @@ const ChatBot = () => {
             ...prev,
             { content: data.message, role: 'bot' },
          ]);
-         setIsBotTyping(false);
          reset({ prompt: '' });
       } catch (error) {
          console.log('Backend error:', error);
+         setError('Something went wrong, try again!');
+      } finally {
+         setIsBotTyping(false);
       }
    };
 
@@ -75,6 +79,7 @@ const ChatBot = () => {
                </div>
             )}
             <div ref={lastMessageRef} />
+            {error && <p className="text-red-500">{error}</p>}
          </div>
          <form
             onSubmit={handleSubmit(onSubmit)}
