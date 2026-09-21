@@ -7,6 +7,14 @@ import axios from 'axios';
 import { FaArrowCircleUp } from 'react-icons/fa';
 import ChatMessages from './ChatMessages';
 import TypingIndicator from './TypingIndicator';
+import popSound from '../../assets/pop.mp3';
+import notificationSound from '../../assets/notification.mp3';
+
+const popAudio = new Audio(popSound);
+popAudio.volume = 0.2;
+
+const notificationAudio = new Audio(notificationSound);
+notificationAudio.volume = 0.2;
 
 const ChatBot = () => {
    const [message, setMessage] = useState([]);
@@ -25,6 +33,7 @@ const ChatBot = () => {
    const onSubmit = async ({ prompt }) => {
       setMessage((prev) => [...prev, { content: prompt, role: 'user' }]);
       setIsBotTyping(true);
+      popAudio.play();
       try {
          const { data } = await axios.post(
             'https://chatbot-gemini-amj9.onrender.com/api/chat',
@@ -34,7 +43,7 @@ const ChatBot = () => {
             ...prev,
             { content: data.message, role: 'bot' },
          ]);
-
+         notificationAudio.play();
          reset({ prompt: '' });
       } catch (error) {
          console.log('Axios Error ', error);
