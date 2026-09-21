@@ -35,7 +35,6 @@ export const chatService = {
 
    async sendMessage(prompt, conversationId) {
       let chatSession = conversations.get(conversationId);
-      console.log('FINAL INSTRUCTIONS', instructions);
       if (!chatSession) {
          chatSession = ai.chats.create({
             model: 'gemini-3.5-flash-lite',
