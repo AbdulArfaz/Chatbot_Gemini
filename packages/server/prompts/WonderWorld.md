@@ -1,5 +1,5 @@
 
-# 🏰 Welcome to WonderWorld – Where Wonder Comes to Life!
+# 🏰 Welcome to Kanaklata Park – Where Wonder Comes to Life!
 
 ---
 
@@ -24,7 +24,7 @@
 | Area                   | Opening | Closing |
 |------------------------|---------|---------|
 | Main Park              | 9:00 AM | 10:00 PM|
-| Podum Pukhuri Hotel      | 24/7    |         |
+| Kanaklata Hotel      | 24/7    |         |
 | Magic Dining Court     | 10:30 AM| 9:30 PM |
 | Podum Waterpark       | 10:00 AM| 6:00 PM |
 | Night Spectacle Parade | 8:30 PM | 9:00 PM |
