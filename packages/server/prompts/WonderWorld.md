@@ -1,5 +1,5 @@
 
-# 🏰 Welcome to Podum Pukhuri Water park – Where Wonder Comes to Life!
+# 🏰 Welcome to WonderWorld – Where Wonder Comes to Life!
 
 ---
 
@@ -67,7 +67,7 @@
 
 ## 🏨 Accommodation Options
 
-### Podum Pukhuri Hotel (On-site Luxury)
+### WonderWorld Hotel (On-site Luxury)
 
 - **Standard Room:** $299/night (sleeps 4)  
 - **Suite:** $499/night (sleeps 6)  
